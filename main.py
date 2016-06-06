@@ -7,23 +7,26 @@ if __name__ == '__main__':
     
     alum_frame = bicycles.Frame('aluminum', 20, 250)
     carbon_frame = bicycles.Frame('carbon', 10, 500)
-    steel_frame = bicycles.Frame('steel', 40, 100)
+    steel_frame = bicycles.Frame('steel', 40, 88)
     
-    trek400 = bicycles.Bicycle('Trek 400', offroad_wheel, steel_frame)
-    trek800 = bicycles.Bicycle('Trek 800',hybrid_wheel, alum_frame)
-    trek1600 = bicycles.Bicycle('Trek 1600', road_wheel, carbon_frame)
-    summit10 = bicycles.Bicycle('Summit 10', offroad_wheel, steel_frame)
-    summit20 = bicycles.Bicycle('Summit 20', hybrid_wheel, alum_frame)
-    summit40 = bicycles.Bicycle('Summit 40', road_wheel, carbon_frame)
+    trek = bicycles.Manufacturer('Trek', 25)
+    summit = bicycles.Manufacturer('Summit', 20)
+    
+    trek400 = bicycles.Bicycle('Trek 400', trek, offroad_wheel, steel_frame)
+    trek800 = bicycles.Bicycle('Trek 800', trek, hybrid_wheel, alum_frame)
+    trek1600 = bicycles.Bicycle('Trek 1600', trek, road_wheel, carbon_frame)
+    summit10 = bicycles.Bicycle('Summit 10', summit, offroad_wheel, steel_frame)
+    summit20 = bicycles.Bicycle('Summit 20', summit, hybrid_wheel, alum_frame)
+    summit40 = bicycles.Bicycle('Summit 40', summit, road_wheel, carbon_frame)
     
     main_street_bike = bicycles.Bike_Shop('Main Street Bike')
     
-    main_street_bike.add_bike_to_inventory(trek400, 3)
-    main_street_bike.add_bike_to_inventory(trek800, 2)
-    main_street_bike.add_bike_to_inventory(trek1600, 2)
-    main_street_bike.add_bike_to_inventory(summit10, 2)
-    main_street_bike.add_bike_to_inventory(summit20, 1)
-    main_street_bike.add_bike_to_inventory(summit40, 1)
+    main_street_bike.buy_bike_from_manufacturer(trek400, 3)
+    main_street_bike.buy_bike_from_manufacturer(trek800, 2)
+    main_street_bike.buy_bike_from_manufacturer(trek1600, 2)
+    main_street_bike.buy_bike_from_manufacturer(summit10, 2)
+    main_street_bike.buy_bike_from_manufacturer(summit20, 1)
+    main_street_bike.buy_bike_from_manufacturer(summit40, 1)
     
     customers = []
     customers.append(bicycles.Customers('Sam', 250))
