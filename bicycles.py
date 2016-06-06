@@ -5,16 +5,46 @@ class Bicycle_Industry(object):
     
     def __init__(self, name):
         self.name = name
-
-class Bicycle(Bicycle_Industry):
-    '''This class contains bicycles.
+        
+class Bicycle_Components(Bicycle_Industry):
+    '''The bicycle and bicycle components all share some characteristics, which
     
-    Customers may purchase bicycles from bike shops.'''
+    in the spirt of writing DRY code, we can abstract and extend with.'''
     
     def __init__(self, name, weight, cost):
         super().__init__(name)
         self.weight = weight
         self.cost = cost
+        
+class Wheel(Bicycle_Components):
+    '''Wheels, along with frames, 
+    
+    belong to bicycles'''
+    
+    def __init__(self, name, weight, cost):
+        super().__init__(name, weight, cost)
+
+class Frame(Bicycle_Components):
+    '''Frames, along with wheels,
+    
+    belong to bicycles'''
+    
+    def __init__(self, material, weight, cost):
+        super().__init__('', weight, cost)
+        self.material = material
+
+class Bicycle(Bicycle_Components):
+    '''This class contains bicycles.
+    
+    Customers may purchase bicycles from bike shops.'''
+    
+    def __init__(self, name, wheel, frame):
+        weight = wheel.weight * 2 + frame.weight
+        cost = wheel.cost * 2 + frame.cost
+        super().__init__(name, weight, cost)
+        self.wheel = wheel
+        self.frame = frame
+
 
 class Bike_Shop(Bicycle_Industry):
     '''This class contains bike shops.
@@ -74,12 +104,20 @@ class Customers(Bicycle_Industry):
         self.fund -= price
         print('They have ${0:.2f} left.'.format(self.fund))
 
-trek400 = Bicycle('Trek 400', 43, 125)
-trek800 = Bicycle('Trek 800', 45, 355)
-trek1600 = Bicycle('Trek 1600', 34, 500)
-summit10 = Bicycle('Summit 10', 48, 150)
-summit20 = Bicycle('Summit 20', 42, 400)
-summit40 = Bicycle('Summit 40', 30, 780)
+road_wheel = Wheel('road', 10, 50)
+hybrid_wheel = Wheel('hybrid', 13, 40)
+offroad_wheel = Wheel('offroad', 20, 38)
+
+alum_frame = Frame('aluminum', 20, 250)
+carbon_frame = Frame('carbon', 10, 500)
+steel_frame = Frame('steel', 40, 100)
+
+trek400 = Bicycle('Trek 400', offroad_wheel, steel_frame)
+trek800 = Bicycle('Trek 800',hybrid_wheel, alum_frame)
+trek1600 = Bicycle('Trek 1600', road_wheel, carbon_frame)
+summit10 = Bicycle('Summit 10', offroad_wheel, steel_frame)
+summit20 = Bicycle('Summit 20', hybrid_wheel, alum_frame)
+summit40 = Bicycle('Summit 40', road_wheel, carbon_frame)
 
 main_street_bike = Bike_Shop('Main Street Bike')
 
